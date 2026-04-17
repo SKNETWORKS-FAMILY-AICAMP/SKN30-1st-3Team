@@ -11,6 +11,7 @@ from pathlib import Path
 # 현재 경로 설정
 # =========================
 BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "데이터"   
 
 # ============================================
 # 페이지 설정
@@ -123,13 +124,13 @@ st.markdown("""
 @st.cache_data
 def load_csv_data():
     try:
-        df_station = pd.read_csv("charging_station_list.csv", encoding='cp949')
-        df_car = pd.read_csv("seoul_car_status.csv", encoding='cp949')
-        df_gu = pd.read_csv("gu_master.csv", encoding='cp949')
+        df_station = pd.read_csv(DATA_DIR / "charging_station_list.csv", encoding='cp949')
+        df_car = pd.read_csv(DATA_DIR / "seoul_car_status.csv", encoding='cp949')
+        df_gu = pd.read_csv(DATA_DIR / "gu_master.csv", encoding='cp949')
     except UnicodeDecodeError:
-        df_station = pd.read_csv("charging_station_list.csv", encoding='utf-8-sig')
-        df_car = pd.read_csv("seoul_car_status.csv", encoding='utf-8-sig')
-        df_gu = pd.read_csv("gu_master.csv", encoding='utf-8-sig')
+        df_station = pd.read_csv(DATA_DIR / "charging_station_list.csv", encoding='utf-8-sig')
+        df_car = pd.read_csv(DATA_DIR / "seoul_car_status.csv", encoding='utf-8-sig')
+        df_gu = pd.read_csv(DATA_DIR / "gu_master.csv", encoding='utf-8-sig')
     return df_station, df_car, df_gu
 
 @st.cache_data          
@@ -169,9 +170,9 @@ def get_shortage_data():
 
 @st.cache_data
 def load_price_map_data():
-    geo_path = BASE_DIR / "서울_자치구_경계_2017.geojson"
-    fee_csv_path = BASE_DIR / "seoul_charge_final.csv"
-    car_csv_path = BASE_DIR / "seoul_car_sum.csv"
+    geo_path = DATA_DIR / "서울_자치구_경계_2017.geojson"
+    fee_csv_path = DATA_DIR / "seoul_charge_final.csv"
+    car_csv_path = DATA_DIR / "seoul_car_sum.csv"
 
     with open(geo_path, "r", encoding="utf-8") as f:
         my_geo = json.load(f)
@@ -205,7 +206,7 @@ def load_price_map_data():
 def load_geojson():
     # 이 부분은 기존과 동일 (파일이 있어야 함)
     try:
-        gdf = gpd.read_file('hangjeongdong_서울특별시.geojson')
+        gdf = gpd.read_file(DATA_DIR / 'hangjeongdong_서울특별시.geojson')
         gdf['sgg'] = gdf['sgg'].astype(int)
         gdf_gu = gdf.dissolve(by='sgg').reset_index()[['sgg', 'sggnm', 'geometry']]
         gdf_gu.columns = ['gu_code', 'gu_name', 'geometry']
@@ -752,7 +753,7 @@ SORT_FILTER_OPTIONS = {
 }
 
 def _get_faq_json_path():
-    return BASE_DIR / "FAQ_final3.json"
+    return DATA_DIR / "FAQ_final3.json"
 
 # 텍스트 정제
 def clean_faq_text(text):
