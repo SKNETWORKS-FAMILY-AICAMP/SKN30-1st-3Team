@@ -42,29 +42,48 @@
 
 ***
 
-## 실행 방법
-1. 전체 파일 다운로드
-2. 터미널 "streamlit run appCSV.py" 실행
-
 ## 📁 프로젝트 구조 (Tree)
 
 ```bash
-🚘 SKN30-1ST-3TEAM/
-├── ERD.png
+🚘 project_1/
 ├── README.md
-├── appCSV.py           # 메인 실행 파일
+├── data
+│   ├── processed                                   # 전처리 완료 데이터
+│   │   ├── FAQ_final3.json                         
+│   │   ├── README.md
+│   │   ├── charging_station_list.csv
+│   │   ├── gu_master.csv
+│   │   ├── hangjeongdong_서울특별시.geojson
+│   │   ├── seoul_car_status.csv
+│   │   ├── seoul_car_sum.csv
+│   │   └── seoul_charge_final.csv
+│   ├── raw_data                                    # 원본 데이터
+│   │   ├── charge_fee                              # 충전소 요금 데이터
+│   │   │   └── charge_fee.csv
+│   │   ├── charger                                 # 충전소 위치 데이터
+│   │   │   └── charging_station_list_raw.csv
+│   │   ├── ev_car                                  # 차량 등록 데이터
+│   │   │   └── seoul_car_status_raw.csv
+│   │   ├── faq                                     # 기업별 수집된 FAQ 원본 (Tesla, Kia 등)
+│   │   │   ├── FAQ_0_일반_sorted.csv
+│   │   │   ├── FAQ_1_kia_ev_final.csv
+│   │   │   ├── FAQ_3_tesla_sorted.csv
+│   │   │   ├── FAQ_4_ev_faq_final.csv
+│   │   │   └── FAQ_5_mugonghae.csv
+│   │   ├── map                                     # 지도 데이터
+│   │   │   ├── hangjeongdong_서울특별시_raw.geojson
+│   │   │   └── 서울_자치구_경계_2017.geojson
+│   │   └── seoul_EV.ipynb                          # 충전소 데이터 정제용 코드
+│   └── webcrawling                                 # 웹크롤링 데이터
+│       ├── proproject_evb.ipynb
+│       ├── proproject_kia.ipynb
+│       ├── proproject_mugonghae.ipynb
+│       ├── proproject_pse.py
+│       └── proproject_tesla.py
+├── ERD.png
 ├── pyproject.toml
-├── uv.lock
-├── 데이터
-│   ├── FAQ_final3.json
-│   ├── charging_station_list.csv
-│   ├── gu_master.csv
-│   ├── hangjeongdong_서울특별시.geojson
-│   ├── seoul_car_status.csv
-│   ├── seoul_car_sum.csv
-│   ├── seoul_charge_final.csv
-│   └── 서울_자치구_경계_2017.geojson
-└── 데이터베이스 설계 문서.pdf
+├── appCSV.py                                       # Streamlit 메인 실행 파일
+└── 데이터베이스 설계 문서 (Database Design Specification).pdf    
 ```
 
 ***
